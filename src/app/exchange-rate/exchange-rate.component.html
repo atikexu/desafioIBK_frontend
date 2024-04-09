@@ -1,0 +1,77 @@
+
+<style>
+  .menu {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.menu ul li a:hover {
+  color: #007bff;
+}
+
+.formulario {
+  margin-bottom: 20px;
+}
+
+.formulario input {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.formulario button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.formulario button:hover {
+  background-color: #0056b3;
+}
+</style>
+<nav class="menu">
+  <ul>
+    <li><strong><a routerLink="/exchange-rate">Tipo de Cambio</a></strong></li>
+    <li><a routerLink="/query-list">Lista de Consultas</a></li>
+  </ul>
+</nav>
+<h2>INGRESE LOS DATOS</h2>
+<div class="formulario">
+  <input type="number" [(ngModel)]="monto" placeholder="Monto">
+  <input type="text" [(ngModel)]="monedaOrigen" placeholder="Moneda Origen">
+  <input type="text" [(ngModel)]="monedaDestino" placeholder="Moneda Destino">
+  <button (click)="calcularTipoCambio()">Calcular</button>
+</div>
+<div *ngIf="monto !== undefined">
+  <p>Monto: {{ monto }}</p>
+</div>
+<div *ngIf="nuevoMonto !== undefined">
+  <p>Nuevo Monto: {{ nuevoMonto }}</p>
+</div>
+<div *ngIf="monedaOrigen !== undefined">
+  <p>Moneda Origen: {{ monedaOrigen }}</p>
+</div>
+<div *ngIf="monedaDestino !== undefined">
+  <p>Moneda Destino: {{ monedaDestino }}</p>
+</div>
+<div *ngIf="tipoCambio !== undefined">
+  <p>Tipo de Cambio: {{ tipoCambio }}</p>
+</div>

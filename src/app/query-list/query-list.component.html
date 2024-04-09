@@ -1,0 +1,112 @@
+
+<style>
+  .menu {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.menu ul li a:hover {
+  color: #007bff;
+}
+
+.formulario {
+  margin-bottom: 20px;
+}
+
+.formulario input {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.formulario button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.formulario button:hover {
+  background-color: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+</style>
+<nav class="menu">
+  <ul>
+    <li><a routerLink="/exchange-rate">Tipo de Cambio</a></li>
+    <li><strong><a routerLink="/query-list">Lista de consultas</a></strong></li>
+  </ul>
+</nav>
+
+<div *ngIf="resultResponse">
+  <h2>CONSULTAS</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Fecha</th>
+        <th>Monto</th>
+        <th>Monto con Tipo de Cambio</th>
+        <th>Moneda de Origen</th>
+        <th>Moneda de Destino</th>
+        <th>Tipo de Cambio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let query of resultResponse.queryList">
+        <td>{{ query.id }}</td>
+        <td>{{ query.date }}</td>
+        <td>{{ query.amount }}</td>
+        <td>{{ query.amountExchangeRate }}</td>
+        <td>{{ query.originCurrency }}</td>
+        <td>{{ query.destinationCurrency }}</td>
+        <td>{{ query.exchangeRate }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <mat-paginator [length]="resultResponse?.size"
+                 [pageSize]="5"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
+</div>
